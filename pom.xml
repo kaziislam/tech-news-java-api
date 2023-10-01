@@ -44,6 +44,31 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!--		Manually Add Thymeleaf Layout Dialect and Spring Session JDBC Dependencies
+		We've already added dependencies with Spring Initializr. However, we also want to incorporate the Spring Security Core, Thymeleaf Layout Dialect, and Spring Session JDBC dependencies—which aren't available in Spring Initializr. Knowing how to add dependencies manually without relying on Initializr is a valuable skill, so this will be good practice!
+
+		You can discover and obtain dependency bundles from Maven Central (also known as MVNRepository). This process might remind you of working with Node.js and npm!-->
+
+		<!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf</artifactId>
+		</dependency>
+
+		<!--		grab the following XML for Spring Security Core and Spring Session JDBC: -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-core -->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-core</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
