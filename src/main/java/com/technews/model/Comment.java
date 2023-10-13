@@ -1,22 +1,25 @@
 package com.technews.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "comment")
-
 public class Comment implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String commentText;
     private Integer userId;
     private Integer postId;
+
+    public Comment() {
+    }
 
     public Comment(Integer id, String commentText, Integer userId, Integer postId) {
         this.id = id;
@@ -56,17 +59,21 @@ public class Comment implements Serializable {
     public void setPostId(Integer postId) {
         this.postId = postId;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Comment)) return false;
         Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id) && Objects.equals(commentText, comment.commentText) && Objects.equals(userId, comment.userId) && Objects.equals(postId, comment.postId);
+        return Objects.equals(getId(), comment.getId()) &&
+                Objects.equals(getCommentText(), comment.getCommentText()) &&
+                Objects.equals(getUserId(), comment.getUserId()) &&
+                Objects.equals(getPostId(), comment.getPostId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, commentText, userId, postId);
+        return Objects.hash(getId(), getCommentText(), getUserId(), getPostId());
     }
 
     @Override
