@@ -1,5 +1,6 @@
 package com.technews.controller;
 
+
 import com.technews.model.Post;
 import com.technews.model.User;
 import com.technews.model.Vote;
@@ -15,13 +16,10 @@ import java.util.List;
 
 @RestController
 public class PostController {
-
     @Autowired
     PostRepository repository;
-
     @Autowired
     VoteRepository voteRepository;
-
     @Autowired
     UserRepository userRepository;
 
@@ -34,7 +32,6 @@ public class PostController {
         return postList;
     }
 
-
     @GetMapping("/api/posts/{id}")
     public Post getPost(@PathVariable Integer id) {
         Post returnPost = repository.getById(id);
@@ -43,14 +40,12 @@ public class PostController {
         return returnPost;
     }
 
-
     @PostMapping("/api/posts")
     @ResponseStatus(HttpStatus.CREATED)
     public Post addPost(@RequestBody Post post) {
         repository.save(post);
         return post;
     }
-
 
     @PutMapping("/api/posts/{id}")
     public Post updatePost(@PathVariable int id, @RequestBody Post post) {
@@ -59,14 +54,12 @@ public class PostController {
         return repository.save(tempPost);
     }
 
-
     @PutMapping("/api/posts/upvote")
     public String addVote(@RequestBody Vote vote, HttpServletRequest request) {
         String returnValue = "";
 
-        if(request.getSession(false) != null) {
+        if (request.getSession(false) != null) {
             Post returnPost = null;
-
             User sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
             vote.setUserId(sessionUser.getId());
             voteRepository.save(vote);
@@ -78,10 +71,8 @@ public class PostController {
         } else {
             returnValue = "login";
         }
-
         return returnValue;
     }
-
 
     @DeleteMapping("/api/posts/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
